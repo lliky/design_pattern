@@ -1,13 +1,20 @@
 package facade
 
-import "testing"
+import (
+	"fmt"
+	"log"
+	"testing"
+)
 
-var expect = "A module running\nB module running"
-
-func TestFacadeAPI(t *testing.T){
-	api := NewAPI()
-	ret := api.Test()
-	if ret != expect {
-		t.Fatalf("expect: %s, return: %s", expect, ret)
+func TestNewWalletFacade(t *testing.T) {
+	facade := NewWalletFacade("abc", 123)
+	err := facade.addMoneyToWallet("abc", 123, 10)
+	if err != nil {
+		log.Fatalf("Errors: %s\n", err.Error())
+	}
+	fmt.Println()
+	err = facade.deductMoneyFromWallet("abc", 123, 5)
+	if err != nil {
+		log.Fatalf("Error: %s\n", err.Error())
 	}
 }
